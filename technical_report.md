@@ -1,7 +1,7 @@
-🧠 Thermal Image Classification (ICAS Detection)
+# 🧠 Thermal Image Classification (ICAS Detection)
 Intracranial Aneurysm Screening via Deep Learning on Thermal Images
 
-📖 Overview
+## 📖 Overview
 This project presents a binary classification model for detecting Intracranial Aneurysm Screening (ICAS) cases from thermal RGB images.
 The model distinguishes between:
 
@@ -11,7 +11,7 @@ Non-ICAS (negative) — Normal thermal patterns
 
 A ResNet-18 model with transfer learning was fine-tuned to classify thermal images effectively, addressing data imbalance and overfitting challenges.
 
-📂 Dataset
+## 📂 Dataset
 Class	Count	Directory
 ICAS	303	icas/
 Non-ICAS	647	non_icas/
@@ -23,20 +23,20 @@ Mitigation: Balanced sampling and weighted loss
 
 ⚠️ The dataset size is relatively small, which contributed to overfitting in early training epochs.
 
-⚙️ Model Architecture
-🔹 Base Model
+## ⚙️ Model Architecture
+### 🔹 Base Model
 Backbone: ResNet-18 (pre-trained on ImageNet)
 
 Modification: Final FC layer replaced with a single-neuron linear layer for binary output
 
-🔹 Rationale
+### 🔹 Rationale
 Transfer Learning: Leverages pre-trained features, improving convergence.
 
 ResNet-18: Lightweight yet effective for smaller datasets.
 
 Regularization: Dropout, weight decay, and learning rate scheduling mitigate overfitting.
 
-🧪 Training Strategy
+## 🧪 Training Strategy
 Parameter	Value
 Optimizer	Adam
 Learning Rate	1e-4
@@ -44,12 +44,13 @@ Batch Size	16
 Epochs	15
 Scheduler	ReduceLROnPlateau
 Loss Function	BCEWithLogitsLoss (with class weights)
-⚖️ Class Imbalance Handling
+
+## ⚖️ Class Imbalance Handling
 WeightedRandomSampler: Ensures balanced mini-batches.
 
 pos_weight in BCEWithLogitsLoss: Emphasizes minority (ICAS) class.
 
-🧩 Regularization & Data Processing
+## 🧩 Regularization & Data Processing
 Technique	Description
 Data Augmentation	Random rotation and horizontal flip
 Normalization	ImageNet mean and std normalization
@@ -57,7 +58,7 @@ Weight Decay	L2 regularization to prevent overfitting
 Learning Rate Scheduler	Reduces LR when validation loss stagnates
 These collectively helped stabilize validation performance and limit overfitting on the small dataset.
 
-📈 Evaluation Metrics
+## 📈 Evaluation Metrics
 Evaluation was conducted on a 15% test split.
 
 Metric	Score
@@ -66,9 +67,10 @@ Precision	~0.60
 Recall	~0.57
 F1-Score	~0.63
 AUC (ROC)	~0.64
-➡️ Results indicate partial generalization with noticeable overfitting due to limited data.
+### ➡️ Results indicate partial generalization with noticeable overfitting due to limited data.
 
-📊 Visualization & Analysis
+## 📊 Visualization & Analysis
+
 Visualization	Description
 training_loss_curve.png	Training vs validation loss (converges after ~10 epochs)
 training_accuracy_curve.png	Accuracy stabilizes post epoch 10
@@ -76,22 +78,16 @@ confusion_matrix.png	Minor false negatives (missed ICAS cases)
 roc_curve.png	AUC ≈ 0.64 — moderate class separability
 Validation loss plateaued early, suggesting the model learned core discriminative patterns but lacked enough data diversity to generalize fully.
 
-💬 Discussion
-✅ Strengths
-Robust handling of class imbalance
 
-Effective transfer learning using ResNet-18
-
-Visual interpretability through ROC and confusion matrix
-
-⚠️ Limitations
+## ⚠️ Limitations
 Small dataset size limited the model's ability to generalize
 
 Overfitting observed after ~10 epochs despite regularization
 
 Performance metrics show potential but not yet deployment-ready
 
-🚀 Future Work
+## 🚀 Future Work
+
 Train on larger and more diverse datasets
 
 Explore Vision Transformers (ViT) or EfficientNet backbones
@@ -100,45 +96,13 @@ Apply Grad-CAM for visual interpretability
 
 Extend data augmentation using Albumentations library
 
-🧠 Conclusion
+## 🧠 Conclusion
+
 The fine-tuned ResNet-18 achieved:
 
 Accuracy: ~0.66
-
 AUC: ~0.64
 
 Despite limited data and slight overfitting, the model demonstrated consistent learning and reasonable discrimination between ICAS and non-ICAS cases.
 With more data and stronger regularization, the approach can be scaled for clinical-grade thermal aneurysm screening.
 
-🗂️ Repository Structure
-text
-📁 project_root/
-├── icas/                      # ICAS images
-├── non_icas/                  # Non-ICAS images
-├── ThermalDeepLearning.py     # Training & evaluation script
-├── confusion_matrix.png
-├── roc_curve.png
-├── training_loss_curve.png
-├── training_accuracy_curve.png
-└── README.md
-⚙️ Environment & Dependencies
-Library	Version
-PyTorch	2.4
-Torchvision	0.19
-NumPy	≥1.26
-Matplotlib	≥3.8
-scikit-learn	≥1.5
-Install dependencies:
-
-bash
-pip install torch torchvision numpy matplotlib scikit-learn
-🧪 Usage
-bash
-# Train model
-python ThermalDeepLearning.py --train
-
-# Evaluate on test data
-python ThermalDeepLearning.py --eval
-
-# Generate analysis plots
-python ThermalDeepLearning.py --visualize
