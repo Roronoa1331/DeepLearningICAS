@@ -1,0 +1,10 @@
+{
+  "backbone": "resnet18",
+  "batch_size": 8,
+  "num_epochs": 30,
+  "lr": 0.0005,
+  "weight_decay": 0.0001,
+  "patience": 7,
+  "use_focal_loss": true,
+  "device": "cuda"
+}

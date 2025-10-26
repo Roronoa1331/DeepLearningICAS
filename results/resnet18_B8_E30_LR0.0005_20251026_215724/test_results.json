@@ -1,0 +1,14 @@
+{
+  "accuracy": 55.072463768115945,
+  "classification_report": "              precision    recall  f1-score   support\n\n    Non-ICAS     0.6667    0.6522    0.6593        46\n        ICAS     0.3333    0.3478    0.3404        23\n\n    accuracy                         0.5507        69\n   macro avg     0.5000    0.5000    0.4999        69\nweighted avg     0.5556    0.5507    0.5530        69\n",
+  "confusion_matrix": [
+    [
+      30,
+      16
+    ],
+    [
+      15,
+      8
+    ]
+  ]
+}
