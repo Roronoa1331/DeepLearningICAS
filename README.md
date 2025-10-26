@@ -1,1 +1,2 @@
-Go to the [📊 Visualization & Analysis](#-technical_report) .
+Go to the [📊 Tecnical report ](#-[technical_report](https://github.com/Roronoa1331/DeepLearningICAS/blob/main/technical_report.md)) .
+
